@@ -5,6 +5,8 @@ Target website : https://ctf.apilchand.com.np/challenges
 ## Overview
 Intercepting the web traffic and testing for vulnerabilities using burpsuite community edition. Using burp proxy to intercept the request, manipulating the request to check for vulnerabilities and using tools available to simplify this process.
 
+Performing bruteforce to find the password by adding payload in the intruder tab and studying the response generated
+
 ## Steps and Screenshots
 1. Downloaded Burp Suite Community Edition
 2. Started the application
@@ -25,7 +27,7 @@ I also went through traffics stored in HTTP history tab, it allows to send previ
 ![CompareText](https://github.com/Prayud-Gurung/Burp-Suite/blob/main/Screenshots/HTTPHistory.png)
 6. Repeater
 Using the repeater, I sent the request with different set of credentials to the server. I tried commonly used credentials like admin, user, administrator, guest, 123345 ,qwerty for different response
-![Repeater](https://github.com/Prayud-Gurung/Burp-Suite/blob/main/Screenshots/3.png)
+![Repeater](https://github.com/Prayud-Gurung/Burp-Suite/blob/main/Screenshots/Repeater.png)
 7. Comparer
 To find the difference in responses I sent the response to comparer
 ![Comparer](https://github.com/Prayud-Gurung/Burp-Suite/blob/main/Screenshots/Comparer.png)
@@ -39,3 +41,23 @@ Organizer allows to organize the request and response, for this session I added 
 10. Decoder
 ![Decoder](https://github.com/Prayud-Gurung/Burp-Suite/blob/main/Screenshots/Decoder.png)
 Decoder tool is useful to decrypt the encrypted message in the response from the server or reverse. I explored available options like Base64, URL encoding, HTTP encryption
+
+## Working with intruder tab
+1. I sent the request to intruder for intruder attack
+![Intruder](https://github.com/Prayud-Gurung/Burp-Suite/blob/main/Screenshots/Intruder.png)
+2. I used sniper attack, on the target website and for the password I used payload with a short list of incorrect password with one correct password. For this session, I created a dummy account for learning purpose.
+![Payload](https://github.com/Prayud-Gurung/Burp-Suite/blob/main/Screenshots/Payload.png)
+3. The results of the intruder atack hit the combination against the website is visible in the table. I can see one of the password returned status code 302
+![SniperAttack](https://github.com/Prayud-Gurung/Burp-Suite/blob/main/Screenshots/SniperAttack.png)
+4. To compare the response, I sent the failed result and success to the comparer to compare them against each other
+![Comapre](https://github.com/Prayud-Gurung/Burp-Suite/blob/main/Screenshots/Compare.png)
+5. Also tried SQLi
+![SQLi](https://github.com/Prayud-Gurung/Burp-Suite/blob/main/Screenshots/SQLi.png)
+
+Obesrvation and Findings
+Website lacks input validation or password strength requirement
+Login was a HTTP post request with url encoded data
+Rate limit was enabled in the website which burp suite handled it automatically
+The server generates nonce value for each form generated as we see in the post request
+Could not bypass authenticaiton via SQL injection or 1 = 1 , "or""="
+
